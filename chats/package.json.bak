@@ -1,0 +1,32 @@
+{
+  "name": "chattme",
+  "version": "0.0.1",
+  "description": "Live chat server",
+  "author": "pebiantara@gmail.com",
+  "contributors": [{}],
+  "bin": {
+    "chattme": "./bin/chattme"
+  },
+  "scripts": {
+    "start": "node ./spree_simple_live/chats/chats-server.js"
+  },
+  "main": "./spree_simple_live/chats/chats-server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pebiantara/chatt-me-redis.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": ["pebiantara", "chatme", "livechat"],
+  "dependencies": {},
+  "devDependencies": {},
+  "preferGlobal": true,
+  "private": true,
+  "publishConfig": {
+    "registry": ""
+  },
+  "subdomain": "",
+  "analyze": true,
+  "license": ""
+}

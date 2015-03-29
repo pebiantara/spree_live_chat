@@ -1,0 +1,8 @@
+<script>
+  Spree.current_user_id = <%= raw(try_spree_current_user.try(:id).to_s.inspect) %>;
+  Spree.current_user_email = <%= raw(try_spree_current_user.try(:email).to_s.inspect) %>;
+  Spree.current_ip = '<%= raw(request.remote_ip.to_s).to_s %>';
+  Spree.current_user_admin = <%= raw(try_spree_current_user.try(:has_spree_role?, 'admin').to_s.inspect) %>;
+  Spree.current_tenant = <%= raw(Multitenant.current_tenant.try(:id).to_s.inspect) %>;
+</script>
+<%= javascript_include_tag "spree/main" %>

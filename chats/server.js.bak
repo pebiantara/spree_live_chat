@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+var help = [
+"usage: Chattme [options] ",
+"",
+"Starts a Chattme server using the specified command-line options",
+"",
+"options:",
+"  --port   PORT       Port that the proxy server should run on",
+"  -h, --help          You're staring at it"
+].join('\n');
+
+
+var util = require("util");
+var argv = require("optimist").argv;
+var port = argv.port ? argv.port : 5001;
+
+if (argv.h || argv.help) {
+  return util.puts(help);
+}
+
+Chattme = {
+  io: function(){},
+  redis: function(){}
+}
+
+Chattme.io = require("socket.io")();
+Chattme.io.listen(port);
+// Chattme.redis = require('redis').createClient();
+// Chattme.redis.subscribe('pushme');
+// Chattme.io.on('connection', function(socket){
+//   Chattme.redis.on('message', function(channel, message){
+//     socket.emit(channel, JSON.parse(message));
+//   });
+// });
