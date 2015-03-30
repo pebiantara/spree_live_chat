@@ -1,3 +1,31 @@
+@-webkit-keyframes colorAnimation {
+    from {background-color: #777;}
+    to {background-color: green;}
+}
+
+/* Standard syntax */
+@keyframes colorAnimation {
+    from {background-color: #777;}
+    to {background-color: green;}
+}
+
+
+.new-message .head {
+  -webkit-animation-name: colorAnimation; /* Chrome, Safari, Opera */
+  -webkit-animation-duration: 5s; /* Chrome, Safari, Opera */
+  animation-name: colorAnimation;
+  animation-duration: 5s;
+}
+
+.main-box{
+  width: 195px;
+  float: right;
+  margin-right: 5px;
+  position: relative;
+}
+.text-chat input{width: 100%;}
+.main-box .body-box ul{height: 240px;}
+.main-box .body-box ul li{height: auto;}
 .chat-box{
   position: fixed;
   bottom: 0px;
@@ -46,15 +74,16 @@
   right: 0px;
 }
 
-.chat-box-list-user.open{
+.chat-box-list-user.open, .main-box.open{
   height: 300px;
   top: -270px;
 }
 
-.chat-box-list-user .head{
+.chat-box-list-user .head, .main-box .head{
   cursor: pointer;
   height: 30px;
   padding: 5px;
   color: #fff;
   font-weight: bold;
+  background: #777;
 }

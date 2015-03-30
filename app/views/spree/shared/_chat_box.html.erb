@@ -1,9 +1,10 @@
 <div class="chat-box">
   <div class="chat-box-personal">
-
+    
   </div>
   <div class="chat-box-list-user">
     <div class="head">
+      <i class="fa fa-comments"></i>
       <%= spree_current_user.try(:admin?) ? 'Customers' : 'Customer Service' %>
     </div>
     <div class="body-box <%= spree_current_user.try(:admin?) ? 'box-admin' : 'box-user' %>">

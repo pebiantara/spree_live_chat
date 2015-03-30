@@ -47,7 +47,7 @@ jug.update_box = function(data) {
 };
 
 li_content = function(id, name) {
-  return "<li data-channel=\""+id+"\" id=\""+ id +"\" class=\"user-active active\"><a href=\"javascript:void(0)\"><i class=\"fa fa-dot-circle-o\"></i>" + name.split("@")[0] + "</a>";
+  return "<li data-channel=\""+id+"\" id=\""+ id +"\" onclick=\"createBox('"+id+"', '"+name+"')\" class=\"user-active active\"><a href=\"javascript:void(0)\"><i class=\"fa fa-dot-circle-o\"></i>" + name.split("@")[0] + "</a>";
 };
 
 jug.publish_to_list = function() {  
@@ -73,12 +73,6 @@ jug.collection_data = function(){
   };
   return data;
 }
-
-$(document).ready(function() {
-  $(".chat-box-list-user .head").on('click', function() {
-    $(".chat-box-list-user").toggleClass('open');
-  });  
-});
 
 $(window).bind('unload', function(){ 
   jug.rem_user_online("bind-users-online-" + Spree.current_tenant, jug.collection_data());
