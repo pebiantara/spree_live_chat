@@ -86,6 +86,14 @@ Juggernaut.fn.get_online_users = function(channel, msg){
   this.write(message);
 }
 
+Juggernaut.fn.get_history = function(channel, msg){
+  var message = new Juggernaut.Message;
+  message.type = "history";
+  message.channel = channel;
+  message.data = msg;
+  this.write(message);  
+}
+
 Juggernaut.fn.rem_user_online = function(channel, msg){
   var message = new Juggernaut.Message;
   message.type = "disconnect";

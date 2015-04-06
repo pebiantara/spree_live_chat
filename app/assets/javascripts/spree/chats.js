@@ -1,15 +1,45 @@
 jug.on('connect', function(){
   jug.subscribe(jug.collection_data().id, function(data){
-    createBox(data.from, data.name);
-    $("[data-id='"+data.from+"']").find('ul').append(textContent(data));
-    $("[data-id='"+data.from+"']").find('ul').scrollTop($("[data-id='"+data.from+"']").find('ul')[0].scrollHeight);
-    if(data.id == jug.collection_data().id){
-      $("[data-id='"+data.from+"']").find('input').val('');
+    if (Array.isArray(data)){
+      data = sortByKey(data, 'time');
+      data = data.reverse();
+      $.each(data, function(i, content){
+        if(content)
+          process_subscribed(JSON.parse(content), true);
+      });
     }else{
-      $("[data-id='"+data.from+"']").addClass('new-message');
+      process_subscribed(data);
     }
   });
 })
+
+sortByKey = function (array, key) {
+    return array.sort(function(a, b) {
+      if(a && b){
+        a = JSON.parse(a);
+        b = JSON.parse(b);
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));        
+      }
+    });
+}
+
+process_subscribed = function(data, reverse){
+  reverse = reverse ? reverse : false;
+  createBox(data.from, data.name);
+  if(reverse)
+    $("[data-id='"+data.from+"']").find('ul').prepend(textContent(data));
+  else
+    $("[data-id='"+data.from+"']").find('ul').append(textContent(data));
+
+
+  $("[data-id='"+data.from+"']").find('ul').scrollTop($("[data-id='"+data.from+"']").find('ul')[0].scrollHeight);
+  if(data.id == jug.collection_data().id){
+    $("[data-id='"+data.from+"']").find('input').val('');
+  }else{
+    $("[data-id='"+data.from+"']").addClass('new-message');
+  }
+}
 
 textContent = function(data){
   if(data.id == jug.collection_data().id){
@@ -26,6 +56,7 @@ createBox = function(id, name){
       domE.addClass('open')
   }else{
     $(".chat-box-personal").append(chatBox(id, name));
+    jug.get_history(jug.collection_data().id, {from: id});
   }
 }
 

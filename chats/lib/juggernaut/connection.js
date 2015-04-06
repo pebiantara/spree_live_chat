@@ -35,7 +35,18 @@ Connection.include({
           this.client.event(message.data);
         break;
         case "publish":
+          c = redis.createClient();
+          k = message.channel+':'+message.data.from;
+          c.sadd('conversation:'+k, JSON.stringify(message.data));
           Channel.publish(message);
+        break;
+        case "history":
+          c = redis.createClient();
+          k = message.channel+':'+message.data.from;
+          c.smembers('conversation:'+k, function(error, data){
+            message.data = data;
+            Channel.publish(message);
+          });
         break;
         case "online":
           c = redis.createClient();
