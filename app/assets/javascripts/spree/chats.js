@@ -18,7 +18,7 @@ sortByKey = function (array, key) {
       if(a && b){
         a = JSON.parse(a);
         b = JSON.parse(b);
-        var x = a[key]; var y = b[key];
+        var x = new Date(a[key]); var y = new Date(b[key]);
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));        
       }
     });
